@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian Coffee Roasters — Small-batch, direct-trade coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --espresso:#1f1610;
+    --espresso-2:#2b211b;
+    --parchment:#efe6d8;
+    --parchment-dim:#e2d6c2;
+    --rust:#b5502f;
+    --sage:#8a9a5b;
+    --gold:#c9a24b;
+    --ash:#8c7d6c;
+
+    --display: 'Fraunces', serif;
+    --body: 'Work Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--espresso);
+    color:var(--parchment);
+    font-family:var(--body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(31,22,16,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(239,230,216,0.1);
+  }
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 32px;
+    max-width:1120px;
+    margin:0 auto;
+  }
+  .logo{
+    font-family:var(--display);
+    font-size:1.3rem;
+    font-weight:600;
+    letter-spacing:0.01em;
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .logo span{
+    font-family:var(--mono);
+    font-size:0.62rem;
+    color:var(--gold);
+    letter-spacing:0.12em;
+    font-weight:400;
+  }
+  .nav-links{
+    display:flex;
+    gap:36px;
+    list-style:none;
+    font-size:0.88rem;
+    letter-spacing:0.02em;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color:var(--parchment-dim);
+    transition:color 0.2s ease;
+    position:relative;
+  }
+  .nav-links a:hover{color:var(--gold);}
+  .nav-cta{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    border:1px solid var(--gold);
+    color:var(--gold);
+    padding:9px 18px;
+    border-radius:2px;
+    text-decoration:none;
+    transition:background 0.2s ease, color 0.2s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--gold); color:var(--espresso);}
+  .nav-toggle{display:none;}
+
+  @media (max-width:760px){
+    .nav-links{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 72px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grain{
+    position:absolute;
+    inset:0;
+    opacity:0.05;
+    pointer-events:none;
+    background-image:radial-gradient(circle at 1px 1px, var(--parchment) 1px, transparent 0);
+    background-size:3px 3px;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.75rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--sage);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:28px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:28px;
+    height:1px;
+    background:var(--sage);
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(2.4rem, 6vw, 4.6rem);
+    line-height:1.03;
+    letter-spacing:-0.01em;
+    max-width:15ch;
+    margin-bottom:28px;
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:300;
+    color:var(--gold);
+  }
+  .hero-sub{
+    font-size:1.08rem;
+    color:var(--parchment-dim);
+    max-width:46ch;
+    margin-bottom:40px;
+  }
+  .hero-actions{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:80px;
+  }
+  .btn-primary{
+    background:var(--rust);
+    color:var(--parchment);
+    text-decoration:none;
+    padding:14px 28px;
+    border-radius:2px;
+    font-weight:600;
+    font-size:0.95rem;
+    transition:transform 0.2s ease, background 0.2s ease;
+    display:inline-block;
+  }
+  .btn-primary:hover{background:#a4472a; transform:translateY(-1px);}
+  .btn-ghost{
+    border:1px solid rgba(239,230,216,0.3);
+    color:var(--parchment);
+    text-decoration:none;
+    padding:14px 28px;
+    border-radius:2px;
+    font-size:0.95rem;
+    transition:border-color 0.2s ease, color 0.2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--parchment); }
+
+  /* ---------- ROAST CURVE (signature) ---------- */
+  .curve-panel{
+    border:1px solid rgba(239,230,216,0.12);
+    border-radius:4px;
+    padding:32px 32px 24px;
+    background:linear-gradient(180deg, rgba(239,230,216,0.03), transparent);
+  }
+  .curve-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .curve-head h3{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ash);
+    font-weight:500;
+  }
+  .curve-head .val{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--gold);
+  }
+  svg#curve{width:100%; height:auto; display:block;}
+  #curve-path{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:2;
+    stroke-dasharray:800;
+    stroke-dashoffset:800;
+    animation:draw 2.2s ease forwards 0.3s;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  .curve-marks{
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--mono);
+    font-size:0.7rem;
+    color:var(--ash);
+    margin-top:6px;
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:88px 0;}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:52px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+  }
+  .section-head p{
+    color:var(--ash);
+    max-width:38ch;
+    font-size:0.95rem;
+  }
+
+  /* ---------- ORIGINS ---------- */
+  .origins{background:var(--espresso-2);}
+  .origin-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:rgba(239,230,216,0.1);
+    border:1px solid rgba(239,230,216,0.1);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .origin-card{
+    background:var(--espresso-2);
+    padding:36px 28px;
+    transition:background 0.25s ease;
+  }
+  .origin-card:hover{background:#342821;}
+  .origin-code{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--gold);
+    letter-spacing:0.08em;
+    margin-bottom:18px;
+  }
+  .origin-card h3{
+    font-family:var(--display);
+    font-size:1.5rem;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .origin-meta{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--ash);
+    margin-bottom:18px;
+  }
+  .origin-notes{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .note-tag{
+    font-size:0.72rem;
+    padding:5px 10px;
+    border:1px solid rgba(239,230,216,0.18);
+    border-radius:20px;
+    color:var(--parchment-dim);
+  }
+  .origin-desc{
+    font-size:0.9rem;
+    color:var(--parchment-dim);
+    line-height:1.6;
+  }
+
+  /* ---------- ROAST SLIDER ---------- */
+  .process{
+    background:var(--parchment);
+    color:var(--espresso);
+  }
+  .process .section-head p{color:var(--ash);}
+  .process .section-head h2{color:var(--espresso);}
+
+  .slider-panel{
+    background:var(--espresso);
+    color:var(--parchment);
+    border-radius:6px;
+    padding:44px;
+  }
+  .roast-track-wrap{margin:36px 0 28px;}
+  .roast-track{
+    position:relative;
+    height:10px;
+    border-radius:6px;
+    background:linear-gradient(90deg, #c9d18a 0%, #d9b45f 30%, #b5502f 60%, #4a2c1c 85%, #241611 100%);
+  }
+  input[type="range"]{
+    width:100%;
+    -webkit-appearance:none;
+    appearance:none;
+    background:transparent;
+    position:relative;
+    top:-14px;
+    height:36px;
+    cursor:pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:var(--parchment);
+    border:3px solid var(--espresso);
+    box-shadow:0 0 0 2px var(--gold);
+    margin-top:0;
+    cursor:grab;
+  }
+  input[type="range"]::-moz-range-thumb{
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:var(--parchment);
+    border:3px solid var(--espresso);
+    box-shadow:0 0 0 2px var(--gold);
+    cursor:grab;
+  }
+  input[type="range"]::-webkit-slider-runnable-track{background:transparent;}
+  input[type="range"]::-moz-range-track{background:transparent;}
+
+  .roast-labels{
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--mono);
+    font-size:0.7rem;
+    color:var(--ash);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+
+  .roast-readout{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    margin-top:32px;
+    padding-top:28px;
+    border-top:1px solid rgba(239,230,216,0.12);
+  }
+  .roast-readout .label{
+    font-family:var(--mono);
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ash);
+    margin-bottom:6px;
+  }
+  .roast-readout .value{
+    font-family:var(--display);
+    font-size:1.4rem;
+    font-weight:600;
+    color:var(--gold);
+  }
+  .roast-readout .desc{
+    font-size:0.88rem;
+    color:var(--parchment-dim);
+    margin-top:4px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+    align-items:center;
+  }
+  .about-visual{
+    aspect-ratio:4/5;
+    border-radius:6px;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(201,162,75,0.25), transparent 55%),
+      radial-gradient(circle at 70% 80%, rgba(138,154,91,0.2), transparent 55%),
+      var(--espresso-2);
+    border:1px solid rgba(239,230,216,0.1);
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .about-visual .bean{
+    width:64%;
+    opacity:0.9;
+  }
+  .about h2{
+    font-family:var(--display);
+    font-size:clamp(1.8rem, 4vw, 2.4rem);
+    font-weight:600;
+    margin-bottom:24px;
+  }
+  .about p{
+    color:var(--parchment-dim);
+    margin-bottom:18px;
+    font-size:0.98rem;
+  }
+  .stat-row{
+    display:flex;
+    gap:40px;
+    margin-top:32px;
+  }
+  .stat .num{
+    font-family:var(--display);
+    font-size:2rem;
+    font-weight:600;
+    color:var(--gold);
+  }
+  .stat .lab{
+    font-family:var(--mono);
+    font-size:0.7rem;
+    color:var(--ash);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta{
+    text-align:center;
+    background:var(--espresso-2);
+    border-top:1px solid rgba(239,230,216,0.1);
+    border-bottom:1px solid rgba(239,230,216,0.1);
+  }
+  .cta h2{
+    font-family:var(--display);
+    font-size:clamp(2rem, 5vw, 3rem);
+    font-weight:600;
+    max-width:16ch;
+    margin:0 auto 20px;
+  }
+  .cta p{
+    color:var(--parchment-dim);
+    margin-bottom:36px;
+  }
+  .cta-form{
+    display:flex;
+    gap:10px;
+    max-width:420px;
+    margin:0 auto;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .cta-form input[type="email"]{
+    flex:1;
+    min-width:220px;
+    background:transparent;
+    border:1px solid rgba(239,230,216,0.3);
+    color:var(--parchment);
+    padding:14px 16px;
+    border-radius:2px;
+    font-family:var(--body);
+    font-size:0.92rem;
+  }
+  .cta-form input::placeholder{color:var(--ash);}
+  .cta-note{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--ash);
+    margin-top:16px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:48px 0;
+  }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    font-size:0.85rem;
+    color:var(--ash);
+  }
+  .footer-links{
+    display:flex;
+    gap:24px;
+    list-style:none;
+  }
+  .footer-links a{text-decoration:none; color:var(--ash); transition:color 0.2s ease;}
+  .footer-links a:hover{color:var(--gold);}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .origin-grid{grid-template-columns:1fr;}
+    .about{grid-template-columns:1fr; gap:36px;}
+    .about-visual{aspect-ratio:16/9;}
+    .roast-readout{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">Meridian<span>ROASTERY · EST 2016</span></div>
+    <ul class="nav-links">
+      <li><a href="#origins">Origins</a></li>
+      <li><a href="#process">Roast Process</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a class="nav-cta" href="#cta">Order beans</a>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grain"></div>
+    <div class="wrap">
+      <div class="eyebrow">Small-batch · Direct trade</div>
+      <h1>Coffee roasted to the <em>exact</em> moment it tastes best.</h1>
+      <p class="hero-sub">We buy directly from three growing families, roast in batches under nine kilograms, and log every degree of the curve so a bag from March tastes the same as a bag from November.</p>
+      <div class="hero-actions">
+        <a href="#origins" class="btn-primary">Explore this month's origins</a>
+        <a href="#process" class="btn-ghost">See how we roast</a>
+      </div>
+
+      <div class="curve-panel reveal">
+        <div class="curve-head">
+          <h3>Live roast curve — Ethiopia Guji, lot 04</h3>
+          <span class="val">First crack at 196°C · 9:42</span>
+        </div>
+        <svg id="curve" viewBox="0 0 1000 220" preserveAspectRatio="none">
+          <line x1="0" y1="55" x2="1000" y2="55" stroke="rgba(239,230,216,0.06)" stroke-width="1"/>
+          <line x1="0" y1="110" x2="1000" y2="110" stroke="rgba(239,230,216,0.06)" stroke-width="1"/>
+          <line x1="0" y1="165" x2="1000" y2="165" stroke="rgba(239,230,216,0.06)" stroke-width="1"/>
+          <path id="curve-path" d="M0,200 C120,190 180,150 260,140 C360,128 420,120 520,95 C620,72 680,60 760,50 C840,42 920,32 1000,20"/>
+        </svg>
+        <div class="curve-marks">
+          <span>0:00 charge</span>
+          <span>4:30 turning point</span>
+          <span>9:42 first crack</span>
+          <span>11:15 drop</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGINS -->
+  <section class="origins" id="origins">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>What's in the hopper this month</h2>
+        <p>Three lots, rotated seasonally as harvests come in. Each is roasted within eleven days of arrival.</p>
+      </div>
+      <div class="origin-grid reveal">
+        <div class="origin-card">
+          <div class="origin-code">LOT 04 · YIRGACHEFFE, ETHIOPIA</div>
+          <h3>Guji Heirloom</h3>
+          <div class="origin-meta">1,950m · Washed · Kebele Bombe cooperative</div>
+          <div class="origin-notes">
+            <span class="note-tag">Bergamot</span>
+            <span class="note-tag">Peach</span>
+            <span class="note-tag">Black tea</span>
+          </div>
+          <p class="origin-desc">Light-roasted to keep the florals forward. This is the lot our slider below is calibrated on — try it at "City" and "City+" to taste the difference.</p>
+        </div>
+        <div class="origin-card">
+          <div class="origin-code">LOT 11 · HUILA, COLOMBIA</div>
+          <h3>Finca La Sirena</h3>
+          <div class="origin-meta">1,700m · Honey-processed · Diego Bermúdez</div>
+          <div class="origin-notes">
+            <span class="note-tag">Brown sugar</span>
+            <span class="note-tag">Red apple</span>
+            <span class="note-tag">Almond</span>
+          </div>
+          <p class="origin-desc">A medium roast that balances the honey process's natural sweetness against a clean, structured acidity.</p>
+        </div>
+        <div class="origin-card">
+          <div class="origin-code">LOT 07 · SANTA BÁRBARA, HONDURAS</div>
+          <h3>Los Andes Reserve</h3>
+          <div class="origin-meta">1,550m · Natural · Cooperativa RAOS</div>
+          <div class="origin-notes">
+            <span class="note-tag">Dried fig</span>
+            <span class="note-tag">Cocoa</span>
+            <span class="note-tag">Molasses</span>
+          </div>
+          <p class="origin-desc">Roasted darker to bring out body for espresso, without crossing into bitterness.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROAST SLIDER -->
+  <section class="process" id="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Drag to find your roast</h2>
+        <p>Same bean, five stopping points. This is the actual range we offer for the Guji Heirloom lot.</p>
+      </div>
+      <div class="slider-panel reveal">
+        <div class="roast-track-wrap">
+          <div class="roast-track"></div>
+          <input type="range" id="roastSlider" min="0" max="4" value="1" step="1" aria-label="Roast level" aria-describedby="roastDesc">
+        </div>
+        <div class="roast-labels">
+          <span>Cinnamon</span>
+          <span>City</span>
+          <span>City+</span>
+          <span>Full City</span>
+          <span>Dark</span>
+        </div>
+        <div class="roast-readout">
+          <div>
+            <div class="label">Internal bean temp at drop</div>
+            <div class="value" id="roastTemp">205°C</div>
+          </div>
+          <div>
+            <div class="label">What you'll taste</div>
+            <div class="desc" id="roastDesc">Bright and tea-like, with pronounced florals. Acidity dominates; body is thin.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about">
+      <div class="about-visual reveal">
+        <svg class="bean" viewBox="0 0 200 240" fill="none">
+          <path d="M100 10C50 10 15 60 15 120C15 180 50 230 100 230C150 230 185 180 185 120C185 60 150 10 100 10Z" stroke="#c9a24b" stroke-width="2" opacity="0.5"/>
+          <path d="M100 30C110 70 108 100 100 120C92 140 90 170 100 210" stroke="#efe6d8" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+        </svg>
+      </div>
+      <div class="reveal">
+        <h2>We roast in the same room we cup in.</h2>
+        <p>Meridian started as a single drum roaster in a garage in 2016. It's grown into a proper roastery, but the habit hasn't changed: every batch gets tasted before it's bagged, and if it doesn't hit the profile we're aiming for, it doesn't ship.</p>
+        <p>We work with the same three growing partners year over year, paying above the Fair Trade minimum regardless of the commodity market, because a roaster is only as good as the farms it depends on.</p>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="num">9kg</div>
+            <div class="lab">Max batch size</div>
+          </div>
+          <div class="stat">
+            <div class="num">3</div>
+            <div class="lab">Growing partners</div>
+          </div>
+          <div class="stat">
+            <div class="num">11 days</div>
+            <div class="lab">Harvest to roast</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="cta">
+    <div class="wrap">
+      <h2 class="reveal">Get next month's lots before they're gone.</h2>
+      <p class="reveal">One email a month. New origins, roast notes, and first access to limited lots.</p>
+      <form class="cta-form reveal" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Signed up ✓';">
+        <input type="email" placeholder="you@example.com" required aria-label="Email address">
+        <button type="submit" class="btn-primary" style="border:none; font-family:inherit; cursor:pointer;">Notify me</button>
+      </form>
+      <div class="cta-note reveal">No spam. Unsubscribe anytime.</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>© 2026 Meridian Coffee Roasters</div>
+    <ul class="footer-links">
+      <li><a href="#origins">Origins</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Roast slider
+  const roastData = [
+    { name: "Cinnamon", temp: "196°C", desc: "Bright and tea-like, with pronounced florals. Acidity dominates; body is thin." },
+    { name: "City", temp: "205°C", desc: "Florals settle into stone fruit. Acidity and sweetness come into balance." },
+    { name: "City+", temp: "211°C", desc: "Sweetness peaks. Body thickens; a faint caramel note joins the fruit." },
+    { name: "Full City", temp: "218°C", desc: "Fruit gives way to cocoa and toasted nut. Acidity softens noticeably." },
+    { name: "Dark", temp: "227°C", desc: "Roast flavor leads: bittersweet, smoky, heavy body. Origin character fades." }
+  ];
+
+  const slider = document.getElementById('roastSlider');
+  const tempEl = document.getElementById('roastTemp');
+  const descEl = document.getElementById('roastDesc');
+
+  function updateRoast(){
+    const d = roastData[slider.value];
+    tempEl.textContent = d.temp;
+    descEl.textContent = d.desc;
+  }
+  slider.addEventListener('input', updateRoast);
+  updateRoast();
+</script>
+
+</body>
+</html>
